@@ -1,0 +1,28 @@
+{
+  "name": "xml-stepmania",
+  "displayName": "XML (Stepmania)",
+  "description": "LUA IN XML",
+  "version": "0.0.2",
+  "publisher": "fms-cat",
+  "repository": "https://github.com/FMS-Cat/vscode-xml-stepmania",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "xml-stepmania",
+      "aliases": ["XML (Stepmania)", "xml-stepmania"],
+      "extensions": [".xml"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "xml-stepmania",
+      "scopeName": "text.xmlsm",
+      "path": "./syntaxes/xmlsm.tmLanguage"
+    }]
+  },
+  "icon": "icon.png"
+}

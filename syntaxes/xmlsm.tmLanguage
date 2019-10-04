@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>xml</string>
+	</array>
+	
+	<key>foldingStartMarker</key>
+	<string>^\s*(&lt;[^!?%/](?!.+?(/&gt;|&lt;/.+?&gt;))|&lt;[!%]--(?!.+?--%?&gt;)|&lt;%[!]?(?!.+?%&gt;))</string>
+
+	<key>foldingStopMarker</key>
+	<string>^\s*(&lt;/[^&gt;]+&gt;|[/%]&gt;|--&gt;)\s*$</string>
+
+	<key>keyEquivalent</key>
+	<string>^~X</string>
+
+	<key>name</key>
+	<string>XML (Stepmania)</string>
+
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>&lt;[!%]--</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.xmlsm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>--%?&gt;</string>
+			<key>name</key>
+			<string>comment.block.xmlsm</string>
+		</dict>
+
+		<dict>
+			<key>begin</key>
+			<string>(&lt;/?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.xmlsm</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.namespace.xmlsm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.xmlsm</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.namespace.xmlsm</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.localname.xmlsm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(/?&gt;)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.xmlsm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.tag.xmlsm</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#tagStuff</string>
+				</dict>
+			</array>
+		</dict>
+
+		<dict>
+			<key>include</key>
+			<string>#entity</string>
+		</dict>
+
+		<dict>
+			<key>include</key>
+			<string>#bare-ampersand</string>
+		</dict>
+	</array>
+
+	<key>repository</key>
+	<dict>
+		<key>EntityDecl</key>
+		<dict>
+			<key>begin</key>
+			<string>(&lt;!)(ENTITY)\s+(%\s+)?([:a-zA-Z_][:a-zA-Z0-9_.-]*)(\s+(?:SYSTEM|PUBLIC)\s+)?</string>
+
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.xmlsm</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.entity.xmlsm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.entity.xmlsm</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.entity.xmlsm</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.entitytype.xmlsm</string>
+				</dict>
+			</dict>
+			
+			<key>end</key>
+			<string>(&gt;)</string>
+
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#doublequotedLua</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#singlequotedLua</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#doublequotedString</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#singlequotedString</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>bare-ampersand</key>
+		<dict>
+			<key>match</key>
+			<string>&amp;</string>
+
+			<key>name</key>
+			<string>invalid.illegal.bad-ampersand.xmlsm</string>
+		</dict>
+
+		<key>doublequotedLua</key>
+		<dict>
+			<key>begin</key>
+			<string>(")(%)</string>
+
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.xmlsm</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.lua.begin.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>end</key>
+			<string>"</string>
+
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>name</key>
+			<string>source.lua.quoted.double.xmlsm</string>
+
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.lua</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>doublequotedString</key>
+		<dict>
+			<key>begin</key>
+			<string>"</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.xmlsm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>"</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.xmlsm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>string.quoted.double.xmlsm</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#entity</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#bare-ampersand</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>entity</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.xmlsm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>match</key>
+			<string>(&amp;)([:a-zA-Z_][:a-zA-Z0-9_.-]*|#[0-9]+|#x[0-9a-fA-F]+)(;)</string>
+			
+			<key>name</key>
+			<string>constant.character.entity.xmlsm</string>
+		</dict>
+
+		<key>internalSubset</key>
+		<dict>
+			<key>begin</key>
+			<string>(\[)</string>
+
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>end</key>
+			<string>(\])</string>
+
+			<key>name</key>
+			<string>meta.internalsubset.xmlsm</string>
+			
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#EntityDecl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#parameterEntity</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>parameterEntity</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.xmlsm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>match</key>
+			<string>(%)([:a-zA-Z_][:a-zA-Z0-9_.-]*)(;)</string>
+
+			<key>name</key>
+			<string>constant.character.parameter-entity.xmlsm</string>
+		</dict>
+
+		<key>singlequotedLua</key>
+		<dict>
+			<key>begin</key>
+			<string>(')(%)</string>
+
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.xmlsm</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.lua.begin.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>end</key>
+			<string>'</string>
+
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.xmlsm</string>
+				</dict>
+			</dict>
+
+			<key>name</key>
+			<string>source.lua.quoted.single.xmlsm</string>
+
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.lua</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>singlequotedString</key>
+		<dict>
+			<key>begin</key>
+			<string>'</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.xmlsm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>'</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.xmlsm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>string.quoted.single.xmlsm</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#entity</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#bare-ampersand</string>
+				</dict>
+			</array>
+		</dict>
+
+		<key>tagStuff</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.other.attribute-name.namespace.xmlsm</string>
+						</dict>
+
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.other.attribute-name.xmlsm</string>
+						</dict>
+
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.namespace.xmlsm</string>
+						</dict>
+
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.other.attribute-name.localname.xmlsm</string>
+						</dict>
+					</dict>
+
+					<key>match</key>
+					<string> (?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9]+)=</string>
+				</dict>
+
+				<dict>
+					<key>include</key>
+					<string>#doublequotedLua</string>
+				</dict>
+
+				<dict>
+					<key>include</key>
+					<string>#singlequotedLua</string>
+				</dict>
+
+				<dict>
+					<key>include</key>
+					<string>#doublequotedString</string>
+				</dict>
+				
+				<dict>
+					<key>include</key>
+					<string>#singlequotedString</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+
+	<key>scopeName</key>
+	<string>text.xmlsm</string>
+	
+	<key>uuid</key>
+	<string>84cfa1aa-c820-4ae9-8c69-79f06c5a4a79</string>
+</dict>
+
+</plist>
